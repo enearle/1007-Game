@@ -33,7 +33,7 @@ public class Entity : MonoBehaviour
 
     public void DoDamage(float Damage)
     {
-        worldManager.sound.Play(2);
+        SoundManager.Instance.PlaySoundFX(2);
         if (worldManager == null)
         {
             Debug.Log("Null worldManager reference");
@@ -52,11 +52,11 @@ public class Entity : MonoBehaviour
         
         if (health <= 0)
         {
-            worldManager.sound.Play(1);
+            SoundManager.Instance.PlaySoundFX(1);
             worldManager.CreateExplosion(transform.position, 3f);
             if (this as Player != null)
             {
-                worldManager.LoseGame();
+                worldManager.EndGame();
             }
             else
             {

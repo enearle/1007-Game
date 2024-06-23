@@ -42,7 +42,7 @@ public class Player : Entity
             fireCoolDown = false;
         }
         
-        if ((Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Space)) && !fireCoolDown)
+        if (Input.GetKey(KeyCode.Space) && !fireCoolDown)
         {
             fireCoolDown = true;
             Missile m = worldManager.SpawnMissile(true);

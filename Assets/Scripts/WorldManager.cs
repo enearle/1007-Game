@@ -21,9 +21,8 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private GameObject button;
     [SerializeField] private Explosion explosionPrefab;
     [SerializeField] private SceneChanger sceneChanger;
-    public SoundManager sound;
-
     [SerializeField] private float spawnFreq = 4;
+    
     private float spawnTimer = 0;
     private bool canSpawn = true;
     
@@ -47,12 +46,12 @@ public class WorldManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
         }
         else if(Instance != this)
         {
             Debug.Log("Error: Attempted to instantiate WorldManager singleton");
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         Camera c = Camera.main;
@@ -70,7 +69,6 @@ public class WorldManager : MonoBehaviour
 
     private void Start()
     {
-        sound.Play(0);
         TMPScore.text = "Score: 0";
         UpdateHealth(100);
     }
@@ -85,7 +83,7 @@ public class WorldManager : MonoBehaviour
         if (spawnFreq < 0.5)
         {
             if(!gameLost)
-                WinGame();
+                EndGame();
             return; 
         }
             
@@ -175,7 +173,7 @@ public class WorldManager : MonoBehaviour
 
     private void GetMissile(Missile obj)
     {
-        sound.Play(3);
+        SoundManager.Instance.PlaySoundFX(2);
         obj.gameObject.SetActive(true);
     }
 
@@ -213,23 +211,9 @@ public class WorldManager : MonoBehaviour
     
     // UI //////////////////////////////////////////////////
 
-    public void LoseGame()
+    public void EndGame()
     {
-        gameLost = true;
-        Destroy(player.gameObject);
-        endText.color = Color.red;
-        endText.text = "You lose";
-        endText.gameObject.SetActive(true);
-        button.SetActive(true);
-    }
-    
-    public void WinGame()
-    {
-        Time.timeScale = 0;
-        endText.color = Color.green;
-        endText.text = "You win";
-        endText.gameObject.SetActive(true);
-        button.SetActive(true);
+        MainController.Instance.EndScene(Score);
     }
 
     public void PlayAgain()
