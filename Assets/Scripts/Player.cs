@@ -13,6 +13,8 @@ public class Player : Entity
     private float fireTimer = 0;
     [SerializeField] private Transform missileSpawnTransform;
     [SerializeField] private float playerMoveSpeed = 10;
+    private int cousCousCounter = 0;
+    [SerializeField] private GameObject cousCousPrefab;
     
     
     // Start is called before the first frame update
@@ -27,7 +29,6 @@ public class Player : Entity
     void Update()
     {
         MovePlayer();
-        
         FireWeapon();
     }
     
@@ -40,6 +41,13 @@ public class Player : Entity
         {
             fireTimer = 0;
             fireCoolDown = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && cousCousCounter > 0)
+        {
+            cousCousCounter--;
+            Instantiate(cousCousPrefab, missileSpawnTransform.position, missileSpawnTransform.rotation);
+            worldManager.UpdateCousCous(cousCousCounter);
         }
         
         if (Input.GetKey(KeyCode.Space) && !fireCoolDown)
@@ -71,4 +79,19 @@ public class Player : Entity
         
         o.transform.position += movement;
     }
+
+    public void FillHealth()
+    {
+        health = 100;
+        worldManager.UpdateHealth(health);
+        UpdateHealthUI();
+    }
+
+    public void CousCousUp()
+    {
+        cousCousCounter += 1;
+        worldManager.UpdateCousCous(cousCousCounter);
+    }
+    
+    
 }

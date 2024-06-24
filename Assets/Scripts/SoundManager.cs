@@ -37,14 +37,14 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] oneShot;
     private AudioSource sfxSource;
     private AudioSource musicSource;
-
+    
     [SerializeField] private GameObject Menu;
     
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider panSlider;
-
+    [SerializeField] private int sceneSongIndex = 1;
     [Range(0, 1)] private float volMaster = 1f, volSFX = 0.75f, volBGM = 0.25f;
     [Range(-1, 1)] private float pan = 0;
     private void Awake()
@@ -72,7 +72,7 @@ public class SoundManager : MonoBehaviour
         musicSource.volume = volBGM;
         musicSource.loop = true;
         
-        PlayMusic(0);
+        PlayMusic(sceneSongIndex);
         Debug.Log("SoundManager initialized.");
         InitSliders();
     }

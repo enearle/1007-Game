@@ -10,15 +10,11 @@ public class Entity : MonoBehaviour
     [SerializeField] private SpriteRenderer HealthBar;
     private GameObject healthSprite;
     private Entity entity;
-
+    [SerializeField] private GameObject healthDrop;
+    [SerializeField] private GameObject cousCousDrop;
     protected virtual void Awake()
     {
         entity = this;
-    }
-
-    protected virtual void Start()
-    {
-        
     }
 
     public void SetReferenceToWorld(WorldManager world)
@@ -60,13 +56,20 @@ public class Entity : MonoBehaviour
             }
             else
             {
+                if (Random.Range(0, 10) % 9 == 0)
+                {
+                    if (Random.Range(1, 3) % 2 == 0)
+                        Instantiate(healthDrop, transform.position, transform.rotation);
+                    else
+                        Instantiate(cousCousDrop, transform.position, transform.rotation);
+                }
                 worldManager.DestroyEnemy((Enemy)this);
                 worldManager.UpdateScore();
             } 
         }
     }
 
-    private void UpdateHealthUI()
+    protected void UpdateHealthUI()
     {
         HealthBar.color = new Color(1 - health / 100, health / 100, 0, 1);
         HealthBar.transform.localScale = new Vector3(health / 100, 0.1f, 1);

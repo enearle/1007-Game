@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<SoundData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <mast>1</mast>
+  <bgm>0.35</bgm>
+  <sfx>0.75</sfx>
+  <pan>0</pan>
+</SoundData>

@@ -249,11 +249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3252092d37248e94a8bf4eb71d113f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
   HealthBar: {fileID: 8493037160156343903}
   fireCDDuration: 0.2
   missileSpawnTransform: {fileID: 9133226165259654075}
   playerMoveSpeed: 10
+  cousCousPrefab: {fileID: 4418153874562679588, guid: 52e9cd5ae3055814c8344eafbedf473a, type: 3}
 --- !u!50 &9218915766652993524
 Rigidbody2D:
   serializedVersion: 4
