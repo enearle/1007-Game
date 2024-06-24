@@ -191,8 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdae74e8ddf5364c99882d67fa3f6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
   HealthBar: {fileID: 8493037160156343903}
+  healthDrop: {fileID: 6900815326233166188, guid: 92456b50459690d40b78783fbb277297, type: 3}
+  cousCousDrop: {fileID: 1053162016603725208, guid: e6489f237c6212b4b84dd06bfca9625f, type: 3}
   moveUp: 1
   moveSpeed: {x: -0.5, y: 2, z: 0}
   missileSpawnTransform: {fileID: 9133226165259654075}

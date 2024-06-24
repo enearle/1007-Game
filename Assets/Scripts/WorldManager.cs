@@ -17,7 +17,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private Transform BotSpawn;
     [SerializeField] private TMP_Text TMPScore;
     [SerializeField] private TMP_Text TMPHealth;
-    [SerializeField] private TMP_Text endText;
+    [SerializeField] private TMP_Text TMPCousCousCounter;
     [SerializeField] private GameObject button;
     [SerializeField] private Explosion explosionPrefab;
     [SerializeField] private SceneChanger sceneChanger;
@@ -39,7 +39,7 @@ public class WorldManager : MonoBehaviour
     private IObjectPool<Missile> missilePool;
     private IObjectPool<Enemy> enemyPool;
 
-    private List<Enemy> aliveEnemies;
+    public List<Enemy> aliveEnemies { get; private set; }
     
     private void Awake()
     {
@@ -71,6 +71,7 @@ public class WorldManager : MonoBehaviour
     {
         TMPScore.text = "Score: 0";
         UpdateHealth(100);
+        UpdateCousCous(0);
     }
 
     // Enemies //////////////////////////////////////////////////////
@@ -155,11 +156,13 @@ public class WorldManager : MonoBehaviour
     public Enemy SpawnEnemy()
     {
         Enemy e = enemyPool.Get();
+        aliveEnemies.Add(e);
         return e;
     }
 
     public void DestroyEnemy(Enemy e)
     {
+        aliveEnemies.Remove(e);
         enemyPool.Release(e);
     }
 
@@ -207,6 +210,11 @@ public class WorldManager : MonoBehaviour
     public void UpdateHealth(float Health)
     {
         TMPHealth.text = $"Health = {Health} %";
+    }
+
+    public void UpdateCousCous(int count)
+    {
+        TMPCousCousCounter.text = $"CousCous = {count}";
     }
     
     // UI //////////////////////////////////////////////////
